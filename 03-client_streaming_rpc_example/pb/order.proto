@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ecommerce;
+
+option go_package = "ecommerce/";
+
+import "google/protobuf/wrappers.proto";
+
+message Order {
+  string id = 1;
+  repeated string items = 2;
+  string description = 3;
+  float price = 4;
+  string destination = 5;
+}
+
+service OrderManagement {
+  rpc updateOrders(stream Order) returns (google.protobuf.StringValue);
+}

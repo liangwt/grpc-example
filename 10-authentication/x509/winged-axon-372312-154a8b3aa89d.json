@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "winged-axon-372312",
+  "private_key_id": "154a8b3aa89d3d4c49826f6dbbbe5542b5a9fbbb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDMdhIWlB5e73kK\nAiNM3nlJtF+PjxMZY9VcEpHN0QoAFB/6XE94OtxhDoNIKTMSj6yYB1b8ef+xhPF4\nCJTy19E4RkvMBy1LYLOrnnPo2v0LcJIV9JR+x/hbxLJMJMO3RDAJcjma4S3kcT1l\nxDZQ6QdLSTtwP6h2KZAuBw7WjHTHPqi+KRuGwMv8/zIYG0mNIG0tvccMfPNGe+Q5\nf9ANadorpnYB3Wtz0RAf1V09GKKxsvXuKInY8uhfTDw63W+hhyxroe0zSSs5MFRY\ne0JEUVWfHE5/aC59Su04zuNYbQ3x8/8irXwCMTqbAK4056GA3uBBa8sgsSPB4G0d\nSt3wHWB7AgMBAAECggEAT+FnQrv+u5963g6kxQD8SO/4D8nZr+dBsfWtUkhzzEEQ\nl0teXv48II0/fD9gbUWFrGXdtcliPPRQNNHBg7kOzBomveEl8JeoyomfBmAcUc5a\nvMowA/JTlWLdOAN7FYxF6kLev6RvPhuB3dMRV34bc+36E2pDglrNsjXetbLtYvPk\nw5OLscSCgv893+qmAj2Skb28RKohJj+wiXjqSD4lMVMIlYhB4SKNfd9ia1B1iMi5\nm2Mxuji3WgnJXIfEWPE3HUjzUAWlm/b6IoSyC0b+wekre/STVbTKQksr5HIESD2/\ntYvuo3N79FmabrR4+8cOwilR7UGzv4rxHFzjb61l2QKBgQDpFvhJiRTGTihuPkM8\ndHi3vbipx5c6qBAsiMaVWsWjx6IXvbzRgYPJUL1R0R3XBFGIcBBseEckqTqMalg8\nIrU2n7KLU9+3Bm9GA6dNFlhqdfGDaTmV/9aTzA0+oU6WNTFe3FX7q4d7HWGbQGJZ\nxPjp0br2Iic/Yo7NXHLC9LG12QKBgQDgjr81IV5fgIoeqxyno+eiaGStbL8R39X8\naqgGVyc8LhMEPcUiIO3pfwEV8q1doRH1MAUY0btNEIRNeUEejU6WcYFdnR0uVZy0\n1QbxcgzLdRMVYeDL42Fc7aoZx0/kSmpAieS9WVYdGI222m+oOXnOaUBH6c+dYeLx\nJBTr9bAwcwKBgFRtR32LM4UopihYUQ5Cub8D7zE/5B0Q5trap+NNP601EBc9WHki\nSlPO9OP/tKk/HTEoNiqz3kD/Mv/NPSx6/dxNN+STesLWh9N6W0zmvRvCoLoSkRMt\n2dEq5dk7oDV0Cu/rKxG/bZFAcSxEw9r0J5y5pNimQkUJM+Raig7nhr7xAoGAEZ2B\nCFTux0UZEKDRpaDo6ceQpj4Smv9ZFOz081Jg5IqkuT9zOGMm5pss5aDc0qxw8S/s\nJm9FZx01k7JAVno1QP30bPiHMnxKx7CyU7xjno43igTckoHqwFRwdIc7ECh6P0fR\n5rycUbn8W+y0t5iSoouFHF8OB0WHfO0cqwnh4VsCgYEApz+i8g7afSA6ZSB0fBL3\nlq6zG38mN2Sethb3o1mbkjiAG4pJbjGFhSdP3bbcqrIqLJek2kSWRWJqSoDa81S9\n4LqpMiz26ukjzS+t6ZyPhosi2umGAON9Fa5KoXaFn91EruziiJkZjdqOetKW4A+b\nJ2URfFXP4d5FoCuUGm3e6uc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "example@winged-axon-372312.iam.gserviceaccount.com",
+  "client_id": "101800156276712395928",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/example%40winged-axon-372312.iam.gserviceaccount.com"
+}

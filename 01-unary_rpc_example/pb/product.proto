@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package ecommerce;
+
+option go_package = "ecommerce/";
+
+import "google/protobuf/wrappers.proto";
+
+service OrderManagement {
+    rpc addOrder(Order) returns (google.protobuf.StringValue);
+    rpc getOrder(google.protobuf.StringValue) returns (Order);
+}
+
+message Order {
+    string id = 1;
+    repeated string items = 2;
+    string description = 3;
+    float price = 4;
+    string destination = 5;
+}
+
+message CombinedShipment {
+    string id = 1;
+    string status = 2;
+    repeated Order ordersList = 3;
+}

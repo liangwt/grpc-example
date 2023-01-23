@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package ecommerce.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "/ecommerce";
+
+service OrderManagementService {
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+    option (google.api.http) = {get: "/v1/getOrder"};
+  }
+}
+
+message GetOrderRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetOrderResponse {
+  string id = 1;
+  repeated string items = 2;
+  string description = 3;
+  float price = 4;
+  string destination = 5;
+}
