@@ -18,23 +18,23 @@ const (
 )
 
 var (
-	_      pb.OrderManagementServer = &server{}
+	_      pb.OrderManagementServer = &OrderManagementImpl{}
 	orders                          = make(map[string]pb.Order, 0)
 )
 
-type server struct {
+type OrderManagementImpl struct {
 	pb.UnimplementedOrderManagementServer
 }
 
 // Simple RPC
-func (s *server) AddOrder(ctx context.Context, orderReq *pb.Order) (*wrapperspb.StringValue, error) {
+func (s *OrderManagementImpl) AddOrder(ctx context.Context, orderReq *pb.Order) (*wrapperspb.StringValue, error) {
 	log.Printf("Order Added. ID : %v", orderReq.Id)
 	orders[orderReq.Id] = *orderReq
 	return &wrapperspb.StringValue{Value: "Order Added: " + orderReq.Id}, nil
 }
 
 // Simple RPC
-func (s *server) GetOrder(ctx context.Context, orderId *wrapperspb.StringValue) (*pb.Order, error) {
+func (s *OrderManagementImpl) GetOrder(ctx context.Context, orderId *wrapperspb.StringValue) (*pb.Order, error) {
 	ord, exists := orders[orderId.Value]
 	if exists {
 		return &ord, status.New(codes.OK, "").Err()
@@ -44,7 +44,7 @@ func (s *server) GetOrder(ctx context.Context, orderId *wrapperspb.StringValue) 
 }
 
 // Server-Streaming RPC
-func (s *server) SearchOrders(query *wrapperspb.StringValue, stream pb.OrderManagement_SearchOrdersServer) error {
+func (s *OrderManagementImpl) SearchOrders(query *wrapperspb.StringValue, stream pb.OrderManagement_SearchOrdersServer) error {
 	for _, order := range orders {
 		for _, str := range order.Items {
 			if strings.Contains(str, query.Value) {
@@ -62,7 +62,7 @@ func (s *server) SearchOrders(query *wrapperspb.StringValue, stream pb.OrderMana
 // Client-Streaming RPC
 // 在这段程序中，我们对每一个 Recv 都进行了处理
 // 当发现 io.EOF (流关闭) 后，需要将最终的响应结果发送给客户端，同时关闭正在另外一侧等待的 Recv
-func (s *server) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
+func (s *OrderManagementImpl) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
 	ordersStr := "Updated Order IDs : "
 	for {
 		order, err := stream.Recv()
@@ -79,7 +79,7 @@ func (s *server) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) erro
 	}
 }
 
-func (s *server) ProcessOrders(stream pb.OrderManagement_ProcessOrdersServer) error {
+func (s *OrderManagementImpl) ProcessOrders(stream pb.OrderManagement_ProcessOrdersServer) error {
 
 	batchMarker := 1
 	var combinedShipmentMap = make(map[string]pb.CombinedShipment)

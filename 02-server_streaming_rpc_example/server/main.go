@@ -9,7 +9,8 @@ import (
 
 func main() {
 	s := grpc.NewServer()
-	pb.RegisterOrderManagementServer(s, &server{})
+	
+	pb.RegisterOrderManagementServer(s, &OrderManagementImpl{})
 
 	lit, err := net.Listen("tcp", ":8009")
 	if err != nil {

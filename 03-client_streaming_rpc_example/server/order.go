@@ -8,7 +8,7 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-var _ pb.OrderManagementServer = &server{}
+var _ pb.OrderManagementServer = &OrderManagementImpl{}
 
 var orders = map[string]pb.Order{
 	"101": {
@@ -23,13 +23,13 @@ var orders = map[string]pb.Order{
 	},
 }
 
-type server struct {
+type OrderManagementImpl struct {
 	pb.UnimplementedOrderManagementServer
 }
 
 // 在这段程序中，我们对每一个 Recv 都进行了处理
 // 当发现 io.EOF (流关闭) 后，需要将最终的响应结果发送给客户端，同时关闭正在另外一侧等待的 Recv
-func (s *server) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
+func (s *OrderManagementImpl) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) error {
 	ordersStr := "Updated Order IDs : "
 	for {
 		order, err := stream.Recv()

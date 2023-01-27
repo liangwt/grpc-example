@@ -8,7 +8,7 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-var _ pb.OrderManagementServer = &server{}
+var _ pb.OrderManagementServer = &OrderManagementImpl{}
 
 var orders = map[string]pb.Order{
 	"101": {
@@ -23,11 +23,11 @@ var orders = map[string]pb.Order{
 	},
 }
 
-type server struct {
+type OrderManagementImpl struct {
 	pb.UnimplementedOrderManagementServer
 }
 
-func (s *server) SearchOrders(query *wrapperspb.StringValue, stram pb.OrderManagement_SearchOrdersServer) error {
+func (s *OrderManagementImpl) SearchOrders(query *wrapperspb.StringValue, stram pb.OrderManagement_SearchOrdersServer) error {
 	for _, order := range orders {
 		for _, str := range order.Items {
 			if strings.Contains(str, query.Value) {
