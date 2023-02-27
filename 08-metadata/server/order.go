@@ -28,9 +28,11 @@ func (s *server) AddOrder(ctx context.Context, orderReq *pb.Order) (*wrapperspb.
 
 	orders[orderReq.Id] = *orderReq
 
+	grpc.SetHeader(ctx, metadata.Pairs("header-key1", "val1"))
+
 	// create and send header
 	header := metadata.Pairs("header-key", "val")
-	grpc.SetHeader(ctx, header)
+	grpc.SendHeader(ctx, header)
 
 	// create and set trailer
 	trailer := metadata.Pairs("trailer-key", "val")
@@ -48,6 +50,8 @@ func (s *server) UpdateOrders(stream pb.OrderManagement_UpdateOrdersServer) erro
 	// create and send header
 	header := metadata.Pairs("header-key", "val")
 	stream.SetHeader(header)
+	
+
 	// create and set trailer
 	trailer := metadata.Pairs("trailer-key", "val")
 	stream.SetTrailer(trailer)
