@@ -1,0 +1,19 @@
+version: v1
+plugins:
+  - plugin: go
+    out: ecommerce
+    opt:
+      - paths=source_relative
+  - plugin: go-grpc
+    out: ecommerce
+    opt:
+      - paths=source_relative
+  - name: grpc-gateway
+    out: ecommerce
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+  - name: openapiv2
+    out: doc
+    opt:
+      - logtostderr=true
