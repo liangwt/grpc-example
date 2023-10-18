@@ -10,59 +10,59 @@ import (
 	"google.golang.org/grpc"
 )
 
+// curl -s -X POST \
+// '127.0.0.1:8010/v1/addOrder' \
+// --header 'Accept: */*' \
+// --data '{"id": "102","items": ["Google","Baidu"],"description": "example","price": 0,"destination": "example"}'
+
 func main() {
-	l, err := net.Listen("tcp", ":8009")
-	if err != nil {
-		panic(err)
-	}
+	grpcPort, gwPort := ":8009", ":8010"
 
 	go func() {
+		lis, err := net.Listen("tcp", grpcPort)
+		if err != nil {
+			panic(err)
+		}
+
 		s := grpc.NewServer()
-		pb.RegisterOrderManagementServer(s, &server{})
-		if err := s.Serve(l); err != nil {
+
+		pb.RegisterOrderManagementServer(s, &OrderManagementImpl{})
+		if err := s.Serve(lis); err != nil {
 			panic(err)
 		}
 	}()
 
-	// // This is where the gRPC-Gateway proxies the requests
-	// conn, err := grpc.DialContext(
-	// 	context.Background(),
-	// 	"0.0.0.0:8009",
-	// 	grpc.WithBlock(),
-	// 	grpc.WithInsecure(),
-	// )
-
-	// gwmux := runtime.NewServeMux()
-
-	// err = pb.RegisterOrderManagementHandler(context.Background(), gwmux, conn)
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	mux := http.NewServeMux()
-	
-	{
-		gwmux := runtime.NewServeMux()
-
-		err = pb.RegisterOrderManagementHandlerServer(context.Background(), gwmux, &server{})
-		if err != nil {
-			panic(err)
-		}
-	
-		mux.Handle("/", gwmux)
-	}
-
-	{
-		
-	}
-	
-
-	gwServer := &http.Server{
-		Addr:    ":8010",
-		Handler: mux,
-	}
-
-	if err := gwServer.ListenAndServe(); err != nil {
+	// 建立一个到gRPC Port的连接
+	conn, err := grpc.DialContext(
+		context.Background(),
+		"127.0.0.1"+grpcPort,
+		grpc.WithBlock(),
+		grpc.WithInsecure(),
+	)
+	if err != nil {
 		panic(err)
 	}
+
+	gwmux := runtime.NewServeMux()
+	err = pb.RegisterOrderManagementHandler(context.Background(), gwmux, conn)
+	if err != nil {
+		panic(err)
+	}
+
+	err = gwmux.HandlePath("GET", "/hello/{name}", func(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
+		w.Write([]byte("hello " + pathParams["name"]))
+	})
+
+	http.ListenAndServe(gwPort, gwmux)
+
+	// 以下和http.ListenAndServe(gwPort, gwmux)等价
+
+	// gwServer := &http.Server{
+	// 	Addr:    gwPort,
+	// 	Handler: gwmux,
+	// }
+
+	// if err := gwServer.ListenAndServe(); err != nil {
+	// 	panic(err)
+	// }
 }

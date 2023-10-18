@@ -1,4 +1,4 @@
-module github.com/liangwt/note/grpc/ecosystem
+module github.com/liangwt/note/grpc/ecosystem/grpc-gateway
 
 go 1.19
 
